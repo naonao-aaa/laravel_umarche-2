@@ -19,7 +19,7 @@ class ItemController extends Controller
             $id = $request->route()->parameter('item');
 
             if(!is_null($id)){ 
-                
+
                 $itemId = Product::availableItems()->where('products.id', $id)->exists();
 
                 if(!$itemId){ 
@@ -31,9 +31,11 @@ class ItemController extends Controller
         });
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::availableItems()->get();
+        $products = Product::availableItems()
+        ->sortOrder($request->sort)
+        ->get();
 
         return view('user.index', compact('products'));
     }

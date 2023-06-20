@@ -38,7 +38,7 @@ class ItemController extends Controller
     {
         Mail::to('test@example.com')
         ->send(new TestMail());
-        
+
         $categories = PrimaryCategory::with('secondary')
         ->get();
 
